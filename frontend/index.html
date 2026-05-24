@@ -1441,8 +1441,6 @@ ACHIEVEMENTS:
 
 If asked something not here, say "I don't have that info, but you can contact Sakshi directly at selmokarsakshi0@gmail.com"`;
 
-const OPENROUTER_API_KEY = ""; // ← paste your key
-
 let chatHistory = [];
 
 async function sendChat() {
@@ -1453,17 +1451,11 @@ async function sendChat() {
   chatHistory.push({role:'user', content: q});
   const typing = addTyping();
   try {
+    // Calls Netlify serverless function — key stays secret on server
     const res = await fetch('/.netlify/functions/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'HTTP-Referer': window.location.href,
-        'X-Title': 'Sakshi Selmokar Portfolio'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'openrouter/free', // ← choose your model
-        max_tokens: 1000,
         messages: [
           { role: 'system', content: SYSTEM },
           ...chatHistory
@@ -1554,7 +1546,7 @@ addTermLine(); addTermLine();
   setInterval(()=>{const src=nodes.filter(n=>n.layer===0)[Math.floor(Math.random()*3)];const p=[src];for(let l=1;l<5;l++){const cc=nodes.filter(n=>n.layer===l);p.push(cc[Math.floor(Math.random()*cc.length)]);}sigs.push({path:p,t:0,s:.009+Math.random()*.006});},700);
   function draw(){
     ctx.clearRect(0,0,W,H);
-    for(let l=0;l<4;l++){const f=nodes.filter(n=>n.layer===l),t=nodes.filter(n=>n.layer===l+1);f.forEach(a=>t.forEach(b=>{ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(59,130,246,.12)';ctx.lineWidth=.7;ctx.stroke();}));}
+    for(let l=0;l<4;l++){const f=nodes.filter(n=>n.layer===l),t=nodes.filter(n=>n.layer===l+1);f.forEach(a=>t.forEach(b=>{ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(26,32,53,.9)';ctx.lineWidth=.7;ctx.stroke();}));}
     nodes.forEach(n=>{ctx.beginPath();ctx.arc(n.x,n.y,4,0,Math.PI*2);ctx.fillStyle='#161b27';ctx.fill();ctx.strokeStyle='#242f48';ctx.lineWidth=1;ctx.stroke();});
     sigs=sigs.filter(s=>s.t<=1);
     sigs.forEach(s=>{s.t+=s.s;if(s.t>1)return;const seg=s.t*(s.path.length-1),idx=Math.floor(seg),fr=seg-idx;if(idx>=s.path.length-1)return;const a=s.path[idx],b=s.path[idx+1],x=a.x+(b.x-a.x)*fr,y=a.y+(b.y-a.y)*fr;const g=ctx.createRadialGradient(x,y,0,x,y,7);g.addColorStop(0,'rgba(59,130,246,.4)');g.addColorStop(1,'rgba(59,130,246,0)');ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fillStyle='#3b82f6';ctx.fill();});
