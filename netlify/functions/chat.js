@@ -29,7 +29,7 @@ exports.handler = async (event) => {
         'X-Title': 'Sakshi Selmokar Portfolio',
       },
       body: JSON.stringify({
-        model: 'anthropic/claude-3.5-sonnet',
+        model: 'openrouter/free',
         max_tokens: 1000,
         messages: body.messages,
       }),
