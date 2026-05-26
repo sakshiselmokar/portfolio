@@ -365,9 +365,70 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
 /* ══ TYPING EFFECT ══ */
 @keyframes type-cursor{50%{border-color:transparent}}
 .typewriter{border-right:2px solid var(--blue);animation:type-cursor .7s step-end infinite;display:inline}
+
+/* ══ SCROLL PROGRESS BAR ══ */
+.scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--purple));z-index:200;width:0%;transition:width .1s linear}
+
+/* ══ BACK TO TOP ══ */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:10px;background:var(--bg3);border:1px solid var(--bd2);color:var(--t2);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;opacity:0;pointer-events:none;z-index:90}
+.back-top.show{opacity:1;pointer-events:all}
+.back-top:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+
+/* ══ TOAST NOTIFICATION ══ */
+.toast-wrap{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:500;display:flex;flex-direction:column;gap:.5rem;align-items:center;pointer-events:none}
+.toast{background:var(--bg2);border:1px solid var(--bd2);border-radius:12px;padding:.75rem 1.25rem;font-size:13px;color:var(--t0);display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.6);opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;max-width:400px;text-align:center}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08)}
+.toast.error{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08)}
+
+/* ══ CURRENTLY BUILDING BADGE ══ */
+.building-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--green);background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);padding:5px 14px;border-radius:20px;margin-bottom:1rem}
+.building-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;flex-shrink:0}
+
+/* ══ TOOLTIP ══ */
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg4);border:1px solid var(--bd2);border-radius:6px;padding:5px 10px;font-size:11px;font-family:var(--mono);color:var(--t1);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:99}
+[data-tip]:hover::after{opacity:1}
+
+/* ══ FORM VALIDATION STATES ══ */
+.fi.error{border-color:#ef4444}
+.fi.ok-field{border-color:var(--green)}
+.field-err{font-size:11px;color:#ef4444;font-family:var(--mono);margin-top:.3rem;display:none}
+.field-err.show{display:block}
+
+/* ══ CHAT EMPTY STATE / CHAR COUNTER ══ */
+.cw-counter{font-size:10px;font-family:var(--mono);color:var(--t3);padding:0 .85rem .4rem;text-align:right}
+
+/* ══ PROJECT CARD — open indicator ══ */
+.pc-foot .pbt.primary{background:var(--dim);border-color:var(--blue);color:var(--blue)}
+
+/* ══ FOOTER LINKS ══ */
+footer a{color:var(--t3);transition:color .15s}footer a:hover{color:var(--blue)}
+
+/* ══ MOBILE ══ */
+@media(max-width:700px){
+  .hero{grid-template-columns:1fr}
+  .net-wrap{display:none}
+  .nav-links .nl:not(.on){display:none}
+  .contact-wrap{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .resume-sec{grid-template-columns:1fr}
+  .m2{grid-template-columns:1fr}
+  .lab-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-tip="Back to top">↑</button>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toastWrap"></div>
 
 <!-- CMD PALETTE -->
 <div class="cp-overlay" id="cpOverlay">
@@ -399,13 +460,14 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
 <section id="home">
   <div class="hero">
     <div>
+      <div class="building-badge"><div class="building-dot"></div>Currently: Workforce Optimization AI @ Sutherland</div>
       <div class="hero-eyebrow">AI/ML ENGINEER · SUTHERLAND GLOBAL · HYDERABAD</div>
       <h1>Sakshi<br><span class="blue">Selmokar</span></h1>
       <p class="hero-desc">Building enterprise AI systems at Sutherland Global — forecasting pipelines on Azure ML, RAG-based Smart Assist with Claude, computer vision workflows, and applied AI that ships to production.</p>
       <div class="ctas">
-        <button class="btn btn-p" onclick="go('chat')">⚡ Chat with Sakshi AI</button>
-        <button class="btn" onclick="go('projects')">⟶ Projects</button>
-        <button class="btn" onclick="go('experience')">↓ Experience</button>
+        <button class="btn btn-p" onclick="go('chat')" data-tip="Powered by Claude AI">⚡ Chat with Sakshi AI</button>
+        <button class="btn" onclick="go('projects')" data-tip="4 real projects">⟶ Projects</button>
+        <button class="btn" onclick="go('resume')" data-tip="Download PDF">↓ Resume</button>
       </div>
     </div>
     <div>
@@ -497,8 +559,8 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
       </div>
       <div class="tags-row"><span class="tag">Ollama</span><span class="tag">Whisper</span><span class="tag">Piper TTS</span><span class="tag">FastAPI</span><span class="tag">React+TS</span><span class="tag">Streamlit</span><span class="tag">PyPDF2</span></div>
       <div class="pc-foot">
-        <button class="pbt">▶ Details</button>
-        <button class="pbt" onclick="event.stopPropagation();window.open('https://github.com/sakshiselmokar/StudyGenie-AI-Learning-Companion')">↗ GitHub</button>
+        <button class="pbt primary">▶ Details</button>
+        <button class="pbt" onclick="event.stopPropagation();window.open('https://github.com/sakshiselmokar/StudyGenie-AI-Learning-Companion')" data-tip="Opens GitHub">↗ GitHub</button>
       </div>
     </div>
 
@@ -514,7 +576,8 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
       </div>
       <div class="tags-row"><span class="tag">MediaPipe</span><span class="tag">OpenCV</span><span class="tag">Python</span><span class="tag">EMNIST</span><span class="tag">LangChain</span><span class="tag">NumPy</span></div>
       <div class="pc-foot">
-        <button class="pbt">▶ Details</button>
+        <button class="pbt primary">▶ Details</button>
+        <button class="pbt" style="color:var(--t3)" data-tip="Repo coming soon">⌛ GitHub</button>
       </div>
     </div>
 
@@ -530,8 +593,8 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
       </div>
       <div class="tags-row"><span class="tag">ResNet-50</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span><span class="tag">Flask</span><span class="tag">Python</span></div>
       <div class="pc-foot">
-        <button class="pbt">▶ Details</button>
-        <button class="pbt" onclick="event.stopPropagation();window.open('https://github.com/sakshiselmokar/DermAI-Skin-Disease-Diagnosis')">↗ GitHub</button>
+        <button class="pbt primary">▶ Details</button>
+        <button class="pbt" onclick="event.stopPropagation();window.open('https://github.com/sakshiselmokar/DermAI-Skin-Disease-Diagnosis')" data-tip="Opens GitHub">↗ GitHub</button>
       </div>
     </div>
 
@@ -547,8 +610,8 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
       </div>
       <div class="tags-row"><span class="tag">Claude API</span><span class="tag">RAG</span><span class="tag">APIM</span><span class="tag">Azure ML</span><span class="tag">FAISS</span></div>
       <div class="pc-foot">
-        <button class="pbt">▶ Details</button>
-        <button class="pbt" style="color:var(--t3);cursor:not-allowed">🔒 Internal</button>
+        <button class="pbt primary">▶ Details</button>
+        <button class="pbt" style="color:var(--t3);cursor:default" data-tip="Proprietary — Sutherland internal">🔒 Internal</button>
       </div>
     </div>
 
@@ -609,10 +672,11 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
       <span class="chip" onclick="ask('What is her technical stack?')">Tech stack</span>
     </div>
     <div class="cw-inp-row">
-      <textarea class="cw-inp" id="cwIn" placeholder="Ask about experience, projects, skills... or use 🎤" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
-      <button class="cw-mic" id="cwMic" onclick="toggleChatMic()" title="Voice input">🎤</button>
-      <button class="cw-send" onclick="sendChat()">↑</button>
+      <textarea class="cw-inp" id="cwIn" placeholder="Ask anything... or press 🎤 to speak" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" oninput="updateCounter()"></textarea>
+      <button class="cw-mic" id="cwMic" onclick="toggleChatMic()" title="Voice input — speak your question">🎤</button>
+      <button class="cw-send" onclick="sendChat()" data-tip="Send (Enter)">↑</button>
     </div>
+    <div class="cw-counter" id="cwCounter"></div>
   </div>
 </section>
 
@@ -1187,13 +1251,8 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
   <div class="sec-sub">// B.Tech CSE · Gold Medalist · AI/ML Engineer</div>
 
   <div class="res-btns">
-    <!-- 
-      TO ADD YOUR PDF:
-      1. Put your resume PDF inside the frontend/ folder
-      2. Replace "sakshi-selmokar-resume.pdf" below with your filename
-    -->
-    <a class="btn btn-p" href="sakshi-selmokar-resume.pdf" download>↓ Download Resume</a>
-    <a class="btn" href="sakshi-selmokar-resume.pdf" target="_blank">👁 View Resume</a>
+    <a class="btn btn-p" href="sakshi-selmokar-resume.pdf" download data-tip="Saves to your device" onclick="showToast('📄 Resume downloading!','success')">↓ Download Resume</a>
+    <a class="btn" href="sakshi-selmokar-resume.pdf" target="_blank" data-tip="Opens in new tab">👁 View Resume</a>
   </div>
 
   <div class="resume-sec" style="margin-top:1.5rem">
@@ -1239,9 +1298,21 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
   <div class="sec-title">Get In Touch</div>
   <div class="contact-wrap">
     <div>
-      <div class="fg"><label class="fl">name</label><input class="fi" id="cname" type="text" placeholder="Your name"></div>
-      <div class="fg"><label class="fl">email</label><input class="fi" id="cemail" type="email" placeholder="your@email.com"></div>
-      <div class="fg"><label class="fl">message</label><textarea class="fi ft" id="cmsg" placeholder="Hi Sakshi, I'd love to discuss..."></textarea></div>
+      <div class="fg">
+        <label class="fl">name</label>
+        <input class="fi" id="cname" type="text" placeholder="Your name" oninput="clearErr('cname')">
+        <div class="field-err" id="err-cname">Please enter your name</div>
+      </div>
+      <div class="fg">
+        <label class="fl">email</label>
+        <input class="fi" id="cemail" type="email" placeholder="your@email.com" oninput="clearErr('cemail')">
+        <div class="field-err" id="err-cemail">Please enter a valid email</div>
+      </div>
+      <div class="fg">
+        <label class="fl">message</label>
+        <textarea class="fi ft" id="cmsg" placeholder="Hi Sakshi, I'd love to discuss..." oninput="clearErr('cmsg')"></textarea>
+        <div class="field-err" id="err-cmsg">Please write a message</div>
+      </div>
       <button class="btn btn-p send-btn" id="sendBtn" onclick="submitContact()">⟶ Send Message</button>
     </div>
     <div>
@@ -1442,7 +1513,19 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
   </div>
 </div>
 
-<footer>sakshi selmokar · ai/ml engineer · sutherland global · hyderabad <span style="margin:0 .75rem;color:var(--bd)">|</span> <span id="clk"></span></footer>
+<footer>
+  <div>sakshi selmokar · ai/ml engineer · sutherland global · hyderabad</div>
+  <div style="margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap">
+    <a href="https://www.linkedin.com/in/sakshi-selmokar-45802a241/" target="_blank">LinkedIn</a>
+    <span style="color:var(--bd2)">·</span>
+    <a href="https://github.com/sakshiselmokar" target="_blank">GitHub</a>
+    <span style="color:var(--bd2)">·</span>
+    <a href="mailto:selmokarsakshi0@gmail.com">selmokarsakshi0@gmail.com</a>
+    <span style="color:var(--bd2)">·</span>
+    <span id="clk"></span>
+  </div>
+  <div style="margin-top:.5rem;color:var(--t3)">built with intention · <span style="color:var(--blue)">sakshi.dev</span></div>
+</footer>
 
 <script>
 // ════════════════════════════════════════
@@ -2004,21 +2087,49 @@ cpItems.push(
 function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
 
 // ════════════════════════════════════════
-// CONTACT FORM — Formspree
+// TOAST
 // ════════════════════════════════════════
+function showToast(msg, type='success', dur=3500) {
+  const wrap = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type==='success'?'✓':'✕'}</span><span>${msg}</span>`;
+  wrap.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
+  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),350); }, dur);
+}
+
+// ════════════════════════════════════════
+// CONTACT FORM — Formspree + validation
+// ════════════════════════════════════════
+function clearErr(id){
+  const el=document.getElementById(id),err=document.getElementById('err-'+id);
+  if(el)el.classList.remove('error');if(err)err.classList.remove('show');
+}
+function showErr(id,msg){
+  const el=document.getElementById(id),err=document.getElementById('err-'+id);
+  if(el)el.classList.add('error');
+  if(err){if(msg)err.textContent=msg;err.classList.add('show');}
+  return false;
+}
+
 async function submitContact() {
   const name  = document.getElementById('cname').value.trim();
   const email = document.getElementById('cemail').value.trim();
   const msg   = document.getElementById('cmsg').value.trim();
   const btn   = document.getElementById('sendBtn');
-  if(!name || !email || !msg){ alert('Please fill in all fields.'); return; }
-  btn.textContent = 'Sending...'; btn.disabled = true;
+
+  // inline validation
+  let valid = true;
+  if(!name) { showErr('cname','Please enter your name'); valid=false; }
+  if(!email||!/\S+@\S+\.\S+/.test(email)) { showErr('cemail','Please enter a valid email address'); valid=false; }
+  if(!msg) { showErr('cmsg','Please write a message'); valid=false; }
+  if(!valid) return;
+
+  btn.textContent = '⏳ Sending...'; btn.disabled = true;
+
   try {
-    /*
-      SETUP: Go to formspree.io → free account → New Form → paste your ID below
-      Replace YOUR_FORM_ID with the ID from your Formspree dashboard (e.g. "xpwzgkrd")
-    */
-    const res = await fetch('https://formspree.io/f/mpqnyeqj', {
+    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message: msg })
@@ -2026,18 +2137,40 @@ async function submitContact() {
     if(res.ok) {
       btn.textContent = '✓ Sent!';
       btn.style.cssText = 'background:var(--green);border-color:var(--green);width:100%;justify-content:center';
-      ['cname','cemail','cmsg'].forEach(id => document.getElementById(id).value = '');
-      setTimeout(() => { btn.textContent = '⟶ Send Message'; btn.style.cssText = 'width:100%;justify-content:center'; btn.disabled = false; }, 3000);
+      ['cname','cemail','cmsg'].forEach(id => { document.getElementById(id).value=''; clearErr(id); });
+      showToast(`🚀 Sakshi got your message! She'll get back to you soon — probably after deploying a model 😄`, 'success', 5000);
+      setTimeout(()=>{ btn.textContent='⟶ Send Message'; btn.style.cssText='width:100%;justify-content:center'; btn.disabled=false; }, 3000);
     } else { throw new Error(); }
   } catch(e) {
-    btn.textContent = '✕ Failed — email directly';
+    btn.textContent = 'Try again';
     btn.style.cssText = 'background:#ef4444;border-color:#ef4444;width:100%;justify-content:center';
-    setTimeout(() => { btn.textContent = '⟶ Send Message'; btn.style.cssText = 'width:100%;justify-content:center'; btn.disabled = false; }, 3000);
+    showToast('Message failed to send. Try emailing selmokarsakshi0@gmail.com directly 📧', 'error', 5000);
+    setTimeout(()=>{ btn.textContent='⟶ Send Message'; btn.style.cssText='width:100%;justify-content:center'; btn.disabled=false; }, 3000);
   }
 }
 
+// ════════════════════════════════════════
+// CHAR COUNTER
+// ════════════════════════════════════════
+function updateCounter() {
+  const inp = document.getElementById('cwIn');
+  const cnt = document.getElementById('cwCounter');
+  if(!inp||!cnt) return;
+  const len = inp.value.length;
+  cnt.textContent = len > 0 ? `${len} chars · Enter ↵ to send` : '';
+  cnt.style.color = len > 400 ? '#ef4444' : 'var(--t3)';
+}
+
+// ════════════════════════════════════════
+// SCROLL PROGRESS + BACK TO TOP + NAV
+// ════════════════════════════════════════
 window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
+  const y = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  const bar = document.getElementById('scrollBar');
+  if(bar) bar.style.width = (total>0 ? (y/total)*100 : 0)+'%';
+  const bt = document.getElementById('backTop');
+  if(bt) bt.classList.toggle('show', y > 400);
   ['home','experience','projects','ailabs','chat','timeline','resume','contact'].forEach(id=>{
     const el=document.getElementById(id);if(!el)return;
     const top=el.offsetTop-70,bot=top+el.offsetHeight;
@@ -2045,6 +2178,7 @@ window.addEventListener('scroll',()=>{
     if(lnk)lnk.classList.toggle('on',y>=top&&y<bot);
   });
 },{passive:true});
+
 setInterval(()=>{const el=document.getElementById('clk');if(el)el.textContent=new Date().toLocaleTimeString('en-US',{hour12:false});},1000);
 </script>
 </body>
