@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sakshi Selmokar — AI/ML Engineer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="description" content="AI/ML Engineer at Sutherland Global. Building LLM applications, RAG systems, forecasting pipelines, and computer vision. CSE Gold Medalist. SIH National Winner.">
+<meta property="og:title" content="Sakshi Selmokar — AI/ML Engineer">
+<meta property="og:description" content="Building intelligent systems at Sutherland Global — LLMs, RAG, Azure ML forecasting, Computer Vision.">
+<meta property="og:url" content="https://sakshi-selmokar.netlify.app">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sakshi Selmokar — AI/ML Engineer">
+<meta name="twitter:description" content="Building intelligent systems at Sutherland Global — LLMs, RAG, Azure ML forecasting, Computer Vision.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -169,7 +178,19 @@ canvas#net{display:block;width:100%;height:100%}
 .sname{font-size:13px;font-weight:500}
 .shandle{font-size:11px;color:var(--t3);font-family:var(--mono)}
 
-/* ── HEATMAP ── */
+/* ── RESUME ── */
+.resume-sec{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.res-card{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;transition:border-color .2s}.res-card:hover{border-color:var(--bd2)}
+.res-label{font-size:10px;font-family:var(--mono);color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem}
+.res-title{font-size:.95rem;font-weight:600;color:var(--t0);margin-bottom:.2rem}
+.res-sub{font-size:12px;color:var(--t2);margin-bottom:.65rem}
+.res-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.res-btns{display:flex;gap:.65rem;margin-top:1.5rem}
+
+/* ── CONTACT FORM STATES ── */
+.fi:disabled{opacity:.5;cursor:not-allowed}
+.send-btn{width:100%;justify-content:center;transition:all .2s}
+.send-btn:disabled{opacity:.6;cursor:not-allowed}
 .hm{display:flex;gap:3px;flex-wrap:wrap;margin:.75rem 0}
 .hc{width:11px;height:11px;border-radius:2px;background:var(--bg3)}
 .hc.l1{background:#112240}.hc.l2{background:#1a3567}.hc.l3{background:#1d4ed8}.hc.l4{background:#3b82f6}
@@ -366,6 +387,7 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
     <span class="nl" onclick="go('ailabs')">AI Labs</span>
     <span class="nl" onclick="go('chat')">AI Chat</span>
     <span class="nl" onclick="go('timeline')">Timeline</span>
+    <span class="nl" onclick="go('resume')">Resume</span>
     <span class="nl" onclick="go('contact')">Contact</span>
   </div>
   <div class="cmd-btn" onclick="openCp()"><kbd>⌘K</kbd></div>
@@ -1158,17 +1180,69 @@ footer{border-top:1px solid var(--bd);padding:1.75rem 2rem;text-align:center;fon
   </div>
 </section>
 
+<!-- ════ RESUME ════ -->
+<section class="sec" id="resume" style="padding-top:1.5rem">
+  <div class="sec-tag">RESUME</div>
+  <div class="sec-title">Resume</div>
+  <div class="sec-sub">// B.Tech CSE · Gold Medalist · AI/ML Engineer</div>
+
+  <div class="res-btns">
+    <!-- 
+      TO ADD YOUR PDF:
+      1. Put your resume PDF inside the frontend/ folder
+      2. Replace "sakshi-selmokar-resume.pdf" below with your filename
+    -->
+    <a class="btn btn-p" href="sakshi-selmokar-resume.pdf" download>↓ Download Resume</a>
+    <a class="btn" href="sakshi-selmokar-resume.pdf" target="_blank">👁 View Resume</a>
+  </div>
+
+  <div class="resume-sec" style="margin-top:1.5rem">
+    <div class="res-card">
+      <div class="res-label">Education</div>
+      <div class="res-title">Maharashtra Institute of Technology</div>
+      <div class="res-sub">B.Tech Computer Science (Honors in Cloud Computing) · 2021–2025 · Sambhajinagar</div>
+      <div class="res-pills">
+        <span class="pill" style="border-color:var(--amber);color:var(--amber)">CGPA 9.45</span>
+        <span class="pill" style="border-color:var(--amber);color:var(--amber)">🥇 Gold Medalist</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-label">Certification</div>
+      <div class="res-title">Google Cloud</div>
+      <div class="res-sub">Professional Machine Learning Engineer</div>
+      <div class="res-pills">
+        <span class="pill" style="border-color:var(--green);color:var(--green)">✓ Certified</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-label">Current Role</div>
+      <div class="res-title">AI/ML Engineer · Sutherland Global</div>
+      <div class="res-sub">Jun 2025 – Present · Hyderabad</div>
+      <div class="res-pills">
+        <span class="pill">Azure ML</span><span class="pill">RAG</span><span class="pill">Claude API</span><span class="pill">APIM</span>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-label">Previous Role</div>
+      <div class="res-title">AI Intern · Sutherland Global</div>
+      <div class="res-sub">Jan 2025 – May 2025 · Promoted in 5 months</div>
+      <div class="res-pills">
+        <span class="pill">DeepStream</span><span class="pill">Face Recognition</span><span class="pill">RAG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════ CONTACT ════ -->
 <section class="sec" id="contact" style="padding-top:1.5rem">
   <div class="sec-tag">CONTACT</div>
   <div class="sec-title">Get In Touch</div>
   <div class="contact-wrap">
     <div>
-      <div class="fg"><label class="fl">name</label><input class="fi" type="text" placeholder="Your name"></div>
-      <div class="fg"><label class="fl">email</label><input class="fi" type="email" placeholder="your@email.com"></div>
-      <div class="fg"><label class="fl">message</label><textarea class="fi ft" placeholder="Hi Sakshi, I'd love to discuss..."></textarea></div>
-      <button class="btn btn-p" style="width:100%;justify-content:center" onclick="alert('Message sent! (frontend)\n\nTODO: wire to /api/contact')">⟶ Send Message</button>
-      <div class="note" style="margin-top:.6rem">// TODO: POST /api/contact — see backend/contact.py</div>
+      <div class="fg"><label class="fl">name</label><input class="fi" id="cname" type="text" placeholder="Your name"></div>
+      <div class="fg"><label class="fl">email</label><input class="fi" id="cemail" type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label class="fl">message</label><textarea class="fi ft" id="cmsg" placeholder="Hi Sakshi, I'd love to discuss..."></textarea></div>
+      <button class="btn btn-p send-btn" id="sendBtn" onclick="submitContact()">⟶ Send Message</button>
     </div>
     <div>
       <div style="font-size:13px;color:var(--t2);margin-bottom:1.25rem;line-height:1.75">Open to interesting AI/ML roles, research collabs, and building intelligent systems. Based in Hyderabad. Usually replies within 24h.</div>
@@ -1923,12 +1997,48 @@ cpItems.push(
   {l:'AI Labs — StudyGenie',i:'📚',m:'lab',a:()=>openLab('sg')},
   {l:'AI Labs — AirFlow AI',i:'✋',m:'lab',a:()=>openLab('af')},
   {l:'AI Labs — DermAI',i:'🔬',m:'lab',a:()=>openLab('dm')},
-  {l:'Interactive AI Labs section',i:'⚗️',m:'nav',a:()=>go('ailabs')}
+  {l:'Interactive AI Labs section',i:'⚗️',m:'nav',a:()=>go('ailabs')},
+  {l:'Resume',i:'📄',m:'nav',a:()=>go('resume')},
+  {l:'Download Resume',i:'↓',m:'action',a:()=>document.querySelector('a[download]')?.click()}
 );
 function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+
+// ════════════════════════════════════════
+// CONTACT FORM — Formspree
+// ════════════════════════════════════════
+async function submitContact() {
+  const name  = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const msg   = document.getElementById('cmsg').value.trim();
+  const btn   = document.getElementById('sendBtn');
+  if(!name || !email || !msg){ alert('Please fill in all fields.'); return; }
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    /*
+      SETUP: Go to formspree.io → free account → New Form → paste your ID below
+      Replace YOUR_FORM_ID with the ID from your Formspree dashboard (e.g. "xpwzgkrd")
+    */
+    const res = await fetch('https://formspree.io/f/mpqnyeqj', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message: msg })
+    });
+    if(res.ok) {
+      btn.textContent = '✓ Sent!';
+      btn.style.cssText = 'background:var(--green);border-color:var(--green);width:100%;justify-content:center';
+      ['cname','cemail','cmsg'].forEach(id => document.getElementById(id).value = '');
+      setTimeout(() => { btn.textContent = '⟶ Send Message'; btn.style.cssText = 'width:100%;justify-content:center'; btn.disabled = false; }, 3000);
+    } else { throw new Error(); }
+  } catch(e) {
+    btn.textContent = '✕ Failed — email directly';
+    btn.style.cssText = 'background:#ef4444;border-color:#ef4444;width:100%;justify-content:center';
+    setTimeout(() => { btn.textContent = '⟶ Send Message'; btn.style.cssText = 'width:100%;justify-content:center'; btn.disabled = false; }, 3000);
+  }
+}
+
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
-  ['home','experience','projects','ailabs','chat','timeline','contact'].forEach(id=>{
+  ['home','experience','projects','ailabs','chat','timeline','resume','contact'].forEach(id=>{
     const el=document.getElementById(id);if(!el)return;
     const top=el.offsetTop-70,bot=top+el.offsetHeight;
     const lnk=document.querySelector(`.nl[onclick*="'${id}'"]`);
