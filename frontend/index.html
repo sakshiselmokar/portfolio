@@ -2129,7 +2129,7 @@ async function submitContact() {
   btn.textContent = '⏳ Sending...'; btn.disabled = true;
 
   try {
-    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    const res = await fetch('https://formspree.io/f/mpqnyeqj', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message: msg })
